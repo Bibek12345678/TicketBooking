@@ -1,0 +1,44 @@
+﻿@model List<TicketBooking.ViewModel.FlightTravelGridViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List Of Flights</h2>
+<p>
+    @Html.ActionLink("Create New Form", "Create");
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            From Location
+        </th>
+        <th>
+            To Location
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromLocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToLocationName)
+            </td>
+
+            @*<td>
+                    @Html.DisplayFor(modelItem=>item.Location.PlaceName)
+                </td>*@
+            @*<td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>*@
+        </tr>
+    }
+</table>
+

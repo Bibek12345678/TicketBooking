@@ -1,0 +1,46 @@
+﻿@model List<TicketBooking.ViewModel.BookingRateViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div >
+    @Html.ActionLink("Add new Places and Rates ", "Create")
+</div>
+<table class="table">
+    <tr>
+        <th>
+            From Location
+        </th>
+        <th>
+            To Location
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+    @foreach(var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.FromLocationName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ToLocationName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Rate)
+    </td>
+    @*<td>
+            @Html.ActionLink("Delete", "Delete", new { id = item.BookingRateID})
+        </td>*@
+
+    <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete","Delete",new { id = item.Id})
+           
+        </td>
+</tr>
+    }
+</table>
+

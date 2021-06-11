@@ -1,0 +1,22 @@
+﻿@model TicketBooking.Models.BookingRate
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<dl class="form-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Rate)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Rate)
+    </dd>
+</dl>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" />
+    </div>
+}

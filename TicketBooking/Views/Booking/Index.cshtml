@@ -1,0 +1,56 @@
+﻿@model List<TicketBooking.ViewModel.BookingViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email Address</th>
+        <th>Destination</th>
+        <th>NoOfPerson</th>
+        <th>Price</th>
+        <th>Total</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @item.Name
+    </td>
+    <td>
+        @item.PhoneNo
+    </td>
+    <td>
+        @item.Gmail
+    </td>
+    <td>
+        @item.DestinationName
+    </td>
+    <th>
+        @item.NoOfPeople
+    </th>
+    <td>
+        @item.Rate
+    </td>
+    <td>
+        @item.Total
+    </td>
+
+    @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.BookingID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.BookingID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.BookingID })
+        </td>*@
+</tr>
+    }
+
+</table>

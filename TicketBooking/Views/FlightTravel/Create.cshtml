@@ -1,0 +1,45 @@
+﻿@model TicketBooking.Models.FlightTravel 
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.Label("From Location", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.FromLocation, (IEnumerable<SelectListItem>)ViewBag.Locations, "Select From Location", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("To Location", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ToLocation, (IEnumerable<SelectListItem>)ViewBag.Locations, "Select To Location", new { @class = "form-control"})
+            @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @*<div class="form-group">
+
+            @Html.LabelFor(model => model.FromLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FromLocation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FromLocation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ToLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ToLocation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ToLocation, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <div class="col-md-2">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</div>
+}
