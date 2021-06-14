@@ -95,6 +95,7 @@ namespace TicketBooking.Controllers
             return View(flight);
         }
 
+
         public ActionResult Delete(int id)
         {
             FlightTravel flightTravel = db.FlightTravels.Find(id);

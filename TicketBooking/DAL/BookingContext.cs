@@ -19,6 +19,7 @@ namespace TicketBooking.DAL
         public DbSet<BookingRate> BookingRates { get; set; }
 
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<User> Users { get;set }
     }
      
 }

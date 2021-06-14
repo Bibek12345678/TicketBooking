@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -55,6 +56,38 @@ namespace TicketBooking.Repository
                 result = locationEntity.LocationID;
             }
             return result;
+=======
+using System.Linq;
+using System.Web;
+using TicketBooking.Models;
+using System.Data.Entity.ModelConfiguration;
+using TicketBooking.DAL;
+
+namespace TicketBooking.Repository
+{
+    public class LocationRepository
+    {
+        public int AddLocation(Location model)
+        {
+            using(var context=new BookingContext())
+            {
+                Location loc = new Location()
+                {
+                    PlaceName = model.PlaceName
+                };
+                context.Locations.Add(loc);
+                context.SaveChanges();
+                return loc.LocationID;
+            }
+        }
+        public List<Location> GetLocation()
+        {
+            using(var context=new BookingContext())
+            {
+                var result = context.Locations.ToList();
+                return result;
+            }
+>>>>>>> 6fa131fbf2c176685444fdff46873adfa3ea511a
         }
     }
 }

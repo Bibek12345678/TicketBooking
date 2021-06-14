@@ -152,8 +152,14 @@
     <Compile Include="Repository\IFlighttravelRepository.cs" />
     <Compile Include="Repository\ILocationRepository.cs" />
     <Compile Include="Models\Location.cs" />
+<<<<<<< HEAD
     <Compile Include="Repository\LocationRepository.cs" />
+=======
+    <Compile Include="Models\User.cs" />
+>>>>>>> 6fa131fbf2c176685444fdff46873adfa3ea511a
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\FlightTravelRepository.cs" />
+    <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Services\BookingServices.cs" />
     <Compile Include="ViewModel\BookingRateViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel.cs" />
