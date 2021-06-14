@@ -146,7 +146,13 @@
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\BookingRate.cs" />
     <Compile Include="Models\FlightTravel.cs" />
+    <Compile Include="Repository\BookingRepository.cs" />
+    <Compile Include="Repository\FlightTravelRepository.cs" />
+    <Compile Include="Repository\IBookingRepository.cs" />
+    <Compile Include="Repository\IFlighttravelRepository.cs" />
+    <Compile Include="Repository\ILocationRepository.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BookingServices.cs" />
     <Compile Include="ViewModel\BookingRateViewModel.cs" />

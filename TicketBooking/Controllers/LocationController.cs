@@ -5,21 +5,36 @@ using System.Web;
 using System.Web.Mvc;
 using TicketBooking.DAL;
 using TicketBooking.Models;
+using TicketBooking.Repository;
 
 namespace TicketBooking.Controllers
 {
     public class LocationController : Controller
     {
-        private BookingContext db = new BookingContext();
-        // GET: Location
+        //private BookingContext db = new BookingContext();
+        private ILocationRepository _locationRepository;
+        public LocationController()
+        {
+            _locationRepository = new LocationRepository(new DAL.BookingContext());
+        }
+        public LocationController(ILocationRepository locationRepository)
+        {
+            _locationRepository = locationRepository;
+        }
+       
         public ActionResult Index()
         {
-            return View(db.Locations.ToList());
+            var model = _locationRepository.GetAllLocation();
+            return View(model);
         }
         //GEt Create
         public ActionResult Create()
         {
             Location location = new Location();
+           if(TempData["Failed"] != null)
+            {
+                ViewBag.Failed = "Add Location Failed";
+            }
             return View(location);
      
         }
@@ -27,80 +42,86 @@ namespace TicketBooking.Controllers
         public ActionResult Create([Bind(Include = "LocationID,PlaceName")] Location location)
         
         {
-            var alreadyExist = db.Locations.Where(x=>x.PlaceName.ToLower().Trim() == location.PlaceName.ToLower().Trim()).Any();
-            if (alreadyExist)
-            {
-                ModelState.AddModelError("Error", "This place is already exist int location table");
-                location.PlaceName = null;
-                return View(location);
-            }
+          //  var alreadyExist = _locationRepository.Locations.Where(x=>x.PlaceName.ToLower().Trim() == location.PlaceName.ToLower().Trim()).Any();
+            //if (alreadyExist)
+            //{
+            //    ModelState.AddModelError("Error", "This place is already exist int location table");
+            //    location.PlaceName = null;
+            //    return View(location);
+            //}
             if (ModelState.IsValid)
             {
-                db.Locations.Add(location);
-                db.SaveChanges();
-                return RedirectToAction("Create");
+                int result = _locationRepository.AddLocation(location);
+                if(result > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["Failed"] = "Failed";
+                    return RedirectToAction("Create");
+                }
+                
             }
-            return View(location);
+            return View();
         }
-        //Details Get Mehtod
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return HttpNotFound();
-            }
-            return View(location);
-        }
+        ////Details Get Mehtod
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Location location = db.Locations.Find(id);
+        //    if (location == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(location);
+        //}
         //Get Method of Edit
-        public ActionResult Edit(int? id)
+        [HttpGet]
+        public ActionResult Edit(int? LocationID)
         {
-            if (id == null)
+          if(TempData["Failed"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.Failed = "Edit Location Failed";
             }
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return HttpNotFound();
-            }
+            Location location = _locationRepository.GetLocationById(LocationID);
             return View(location);
         }
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "LocationID,PlaceName")] Location location)
+        public ActionResult Edit(Location location)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(location).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                int result = _locationRepository.UpdateLocation(location);
+                if(result > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            return View(location);
+            return View();
         }
         //Get For Delete
-        public ActionResult Delete(int? id)
+        [HttpGet]
+        public ActionResult Delete(int? LocationID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return HttpNotFound();
-            }
+            Location location = _locationRepository.GetLocationById(LocationID);
             return View(location);
         }
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Location location)
         {
-            Location location = db.Locations.Find(id);
-            db.Locations.Remove(location);
-            db.SaveChanges();
+           if(TempData["Failed"] != null)
+            {
+                ViewBag.Failed = "Delete Location Failed";
+            }
+            _locationRepository.DeleteLocation(location.LocationID);
             return RedirectToAction("Index");
         }
     }

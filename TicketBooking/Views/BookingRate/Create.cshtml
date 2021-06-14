@@ -10,7 +10,7 @@
     <div class="form-group">
         @Html.Label("Location", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-30">
-            @Html.DropDownListFor(model => model.FlightTravelID, (IEnumerable<SelectListItem>)ViewBag.FlighTravels, "Select Flight Travels", new { @class = "form-blue" })
+            @Html.DropDownListFor(model => model.FlightTravelID, (IEnumerable<SelectListItem>)ViewBag.FlighTravels, "Select Flight Travels", new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.FlightTravelID, "", new { @class = "text-danger" })
         </div>
     </div>
