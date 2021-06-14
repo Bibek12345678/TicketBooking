@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -56,7 +55,6 @@ namespace TicketBooking.Repository
                 result = locationEntity.LocationID;
             }
             return result;
-=======
 using System.Linq;
 using System.Web;
 using TicketBooking.Models;
@@ -87,7 +85,6 @@ namespace TicketBooking.Repository
                 var result = context.Locations.ToList();
                 return result;
             }
->>>>>>> 6fa131fbf2c176685444fdff46873adfa3ea511a
         }
     }
 }
